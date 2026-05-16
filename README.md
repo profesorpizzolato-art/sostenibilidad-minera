@@ -67,3 +67,18 @@ La sostenibilidad moderna se apoya en la transformación digital (Industria 4.0)
 
 ---
 💻 *Material didáctico desarrollado bajo la arquitectura del Simulador MENFA. Quedan reservados todos los derechos de autoría y propiedad del software.*
+## 📐 Módulo 1.5: Secuencia del Ciclo de Vida de una Mina (Fases Iniciales)
+
+El desarrollo de un yacimiento sigue una ingeniería de fases progresivas donde el riesgo geológico y financiero se mitiga mediante compuertas de decisión (*Stage-Gates*):
+
+### ⚖️ 00. Tramitación de Aprobaciones Ambientales
+Bajo el marco legal de Mendoza y la Nación, es la condición obligatoria de inicio. Exige la presentación de Informes de Impacto Ambiental y mecanismos obligatorios de participación ciudadana (**Talleres y Audiencias Públicas**) para blindar la Licencia Social antes de cualquier intervención en el terreno.
+
+### 🔍 01. Exploración
+Fase de prospección geológica, muestreo y perforación diamantina. Su objetivo técnico es cubicar el yacimiento, definiendo si el binomio **Toma de Reservas / Ley de Corte** justifica el despliegue financiero del proyecto.
+
+### 📜 02. Consultas y Permisos
+Profundización de los canales de comunicación institucionales con comunidades tradicionales y *stakeholders*. Gestión y obtención de derechos de agua, servidumbres de paso y permisos sectoriales de construcción ante las autoridades mineras y ambientales.
+
+### 📊 03. Evaluación de Factibilidad
+Ingeniería de detalle básica y modelado financiero. Determinación del CAPEX/OPEX de la operación, diseño conceptual de la planta metalúrgica y cálculo de indicadores de rentabilidad (VAN/TIR) frente a escenarios de volatilidad de precios internacionales.
