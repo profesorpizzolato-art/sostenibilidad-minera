@@ -82,3 +82,16 @@ Profundización de los canales de comunicación institucionales con comunidades 
 
 ### 📊 03. Evaluación de Factibilidad
 Ingeniería de detalle básica y modelado financiero. Determinación del CAPEX/OPEX de la operación, diseño conceptual de la planta metalúrgica y cálculo de indicadores de rentabilidad (VAN/TIR) frente a escenarios de volatilidad de precios internacionales.
+### 🏗️ 04. Construcción
+Fase de alta intensidad en ingeniería civil y generación de empleo. Comprende la apertura de accesos viales, montaje electromecánico de plantas de beneficio, tendido de líneas eléctricas de alta tensión, sistemas de manejo de agua y edificación de campamentos mineros autosustentables.
+
+### ⛏️ 05. Extracción y Procesamiento
+Fase operativa de producción comercial. Extracción física de la roca mineralizada mediante métodos de cielo abierto o subterráneos. Procesamiento en plantas metalúrgicas para concentrar y separar el mineral valioso del material estéril (ganga), el cual es dispuesto de forma segura en diques de colas.
+
+### ⚗️ 06. Refinación
+Procesos avanzados de fundición y electro-refinación donde se eliminan las impurezas remanentes del concentrado, elevando el producto metalúrgico a su máxima pureza comercial (cátodos/lingotes) requerida por el mercado manufacturero global.
+
+### 🍃 07. Cierre y Remediación
+Compromiso mandatorio planificado desde el diseño inicial. Implica el desmantelamiento de instalaciones industriales, la estabilización geomecánica y geoquímica de los depósitos de colas (prevención de drenaje ácido), la revegetación del entorno con flora nativa y el monitoreo ambiental post-clausura a largo plazo.
+
+> 📊 **Nota de Escala Industrial:** Un proyecto mediano puede completarse en un horizonte corto de años; sin embargo, un yacimiento de clase mundial (*World Class*) requiere típicamente **más de 20 años de inversión y desarrollo técnico continuo** antes de alcanzar la fase de producción, exigiendo proveedores estratégicos integrados de largo plazo.
