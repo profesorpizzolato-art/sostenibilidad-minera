@@ -1,5 +1,10 @@
-📁 mi-repositorio-esg/
+📁 simulador-esg-minero/
 │
-├── 📄 app.py         <-- El código de Streamlit que te acabo de generar
-├── 📄 README.md      <-- El manual interactivo en Markdown que te pasé antes
-└── 📄 requirements.txt <-- Archivo con las librerías necesarias
+├── 📄 app.py                <-- Interfaz limpia (Muestra menús, pestañas y botones)
+├── 📄 requirements.txt      <-- Dependencias del proyecto
+├── 📄 README.md             <-- Documentación V6
+│
+└── 📁 modulos/              <-- Carpeta contenedora de lógica
+    ├── 📄 __init__.py       <-- Inicializador (Vacío, para que Python lo reconozca)
+    ├── 📄 evaluacion_esg.py <-- Módulo del video 1 (Formularios y Ponderación)
+    └── 📄 ciclo_vida.py     <-- Módulo del video 2 (Cálculos e Ingeniería de Mina)
