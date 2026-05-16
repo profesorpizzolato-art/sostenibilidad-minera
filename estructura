@@ -1,0 +1,5 @@
+📁 mi-repositorio-esg/
+│
+├── 📄 app.py         <-- El código de Streamlit que te acabo de generar
+├── 📄 README.md      <-- El manual interactivo en Markdown que te pasé antes
+└── 📄 requirements.txt <-- Archivo con las librerías necesarias
