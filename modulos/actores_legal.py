@@ -44,3 +44,43 @@ def validar_matriz_legal_mendoza(ley_nacional, ley_procedimiento, ley_ambiental,
     
     aprobado = all(checklist.values())
     return aprobado, checklist
+# Módulo de Dinámica de Actores y Validación Normativa de Mendoza
+import random
+
+def obtener_perfiles_actores():
+    return {
+        "Compañía Junior": {
+            "rol": "Descubrimiento y Exploración Inicial",
+            "financiamiento": "Mercado de Capitales (Venta de Acciones / Equity de alto riesgo)",
+            "foco": "Agilidad técnica en geología y perforación minera preliminar."
+        },
+        "Compañía Major": {
+            "rol": "Construcción, Operación Comercial y Cierre Complejo",
+            "financiamiento": "Reinversión de Ingresos Operativos y Sindicación de Deuda Global",
+            "foco": "Capacidad de infraestructura para proyectos de miles de millones de dólares (World Class)."
+        },
+        "Proveedores y Servicios Locales": {
+            "rol": "Soporte de Ingeniería, Logística, Mantenimiento y Tecnología",
+            "financiamiento": "Contratos comerciales (Adjudicación por licitaciones OPEX/CAPEX)",
+            "foco": "Multiplicación de empleo indirecto y desarrollo del entramado PyME regional."
+        }
+    }
+
+def simular_probabilidad_exploracion(anomalías_investigadas):
+    """Aplica la estadística real de la industria: solo 1 de cada 1.000.000 de indicios llega a ser mina."""
+    prob_base = 1 / 1000000
+    # Cálculo probabilístico acumulado binomial
+    prob_acumulada = (1 - ((1 - prob_base) ** anomalías_investigadas)) * 100
+    exito = random.random() < (prob_acumulada / 100)
+    return prob_acumulada, exito
+
+def verificar_marco_dia_mendoza(nacional, provincial, ambiental, decreto):
+    """Valida el conocimiento del orden jerárquico normativo para operar en Mendoza."""
+    checks = {
+        "nacional": nacional == "Código de Minería de la Nación (Ley N° 1919)",
+        "provincial": provincial == "Ley N° 9529 (Procedimiento Minero)",
+        "ambiental": ambiental == "Ley N° 5961 (Preservación del Medio Ambiente)",
+        "decreto": decreto == "Decreto N° 820/2006 (Reglamento Ambiental)"
+    }
+    es_valido = all(checks.values())
+    return es_valido, checks
