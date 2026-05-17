@@ -3,6 +3,7 @@ import streamlit as st
 from modulos.evaluacion_esg import calcular_nivel_esg
 from modulos.ciclo_vida import calcular_ley_corte, calcular_balance_masa, calcular_fondo_cierre
 from modulos.mercado_recursos import obtener_datos_minerales, calcular_ingresos_mercado
+from modulos.actores_legal import obtener_perfiles_actores, simular_riesgo_exploracion, validar_matriz_legal_mendoza
 
 
 st.set_page_config(page_title="Simulador Industrial MENFA", page_icon="🌍", layout="wide")
@@ -21,6 +22,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "⛏️ Planta y Operación", 
     "🍃 Cierre de Mina"
     "📈 Mercados y Commodities"
+    "⚖️ Actores y Marco Legal"
 ])
 
 # ---- PESTAÑA 1: EVALUACIÓN ESG ----
@@ -134,3 +136,51 @@ with tab5:
         st.error("🚨 **Riesgo de Viabilidad:** Las caídas en el mercado internacional impactan directo en el VAN/TIR local. Las operaciones deben optimizar su OPEX para resistir el ciclo bajo.")
     elif fluctuacion > 0:
         st.success("🚀 **Ciclo de Alta (Boom):** Ventana de oportunidad para acelerar inversiones, optimizar exploración y consolidar contratos de provisión de largo plazo.")
+# ==========================================
+# ---- PESTAÑA 6: ACTORES Y MARCO LEGAL ----
+# ==========================================
+with tab6:
+    st.header("Gobernanza del Ecosistema Minero y Marco Regulatorio")
+    st.write("La minería moderna es una asociación estratégica entre capital, conocimiento técnico y estricta legalidad institucional.")
+    
+    col_act, col_leg = st.columns(2)
+    
+    with col_act:
+        st.markdown("### 👥 1. Interacción de Actores y Capital")
+        actores = obtener_perfiles_actores()
+        actor_sel = st.selectbox("Seleccione un actor del ecosistema para ver su perfil técnico-financiero:", list(actores.keys()))
+        
+        info = actores[actor_sel]
+        st.info(f"**Rol Central:** {info['rol']}\n\n**Estructura de Financiamiento:** {info['financiamiento']}\n\n**Ventaja Competitiva:** {info['fortaleza']}\n\n**Riesgo / Desafío:** {info['desafio']}")
+        
+        st.markdown("---")
+        st.markdown("#### 🎲 Simulación de Riesgo Minero: El filtro de 1 en 1.000.000")
+        intentos = st.number_input("Cantidad de indicios / anomalías geológicas a investigar en campaña:", value=150000, step=10000)
+        
+        # Simulación analítica del descarte geológico
+        import numpy as np # Aseguramos la librería para el cálculo rápido
+        prob_acum, exito = simular_riesgo_exploracion(intentos)
+        
+        st.metric("Probabilidad Estadística de Hallar una Mina", f"{prob_acum:.4f}%")
+        st.caption("Recuerde: Solo 1 de cada millón de indicios explorados se consolida como un proyecto viable comercialmente.")
+
+    with col_leg:
+        st.markdown("### ⚖️ 2. Auditoría del Marco Legal (Mendoza)")
+        st.write("Para liberar fondos de inversión, el operador debe demostrar conocimiento estricto del procedimiento para obtener la Declaración de Impacto Ambiental (DIA) obligatoria:")
+        
+        # Formulario de examen técnico para el alumno
+        l_nac = st.selectbox("Código de Minería de la Nación:", ["Seleccionar...", "Ley Nacional N° 24196", "Código de Minería de la Nación (Ley N° 1919)", "Ley Nacional N° 25675"])
+        l_proc = st.selectbox("Código de Procedimiento Minero de Mendoza:", ["Seleccionar...", "Ley Provincial N° 7722", "Ley Provincial N° 9529", "Ley Provincial N° 8461"])
+        l_amb = st.selectbox("Ley de Preservación del Medio Ambiente (Mendoza):", ["Seleccionar...", "Ley Provincial N° 5961", "Ley Provincial N° 6045", "Ley Provincial N° 7490"])
+        d_reg = st.selectbox("Decreto Reglamentario de Evaluación Ambiental Minera:", ["Seleccionar...", "Decreto N° 2100/2005", "Decreto N° 820/2006", "Decreto N° 437/1993"])
+        
+        if st.button("⚖️ Validar Cumplimiento Normativo de la DIA"):
+            aprobado, checklist = validar_matriz_legal_mendoza(l_nac, l_proc, l_amb, d_reg)
+            
+            if aprobado:
+                st.success("🟢 **Cumplimiento Legal Exitoso:** La matriz normativa ingresada es correcta. El trámite está habilitado para avanzar ante la autoridad ambiental de aplicación de Mendoza.")
+            else:
+                st.error("🔴 **Infracción de Procedimiento:** Hay errores o vacíos en la jerarquía legal seleccionada. No se puede iniciar la evaluación del Informe de Impacto Ambiental.")
+                # Muestra detallada de qué falló
+                for clave, valor in checklist.items():
+                    if not valor: st.write(f"❌ Revisar parámetro o número de norma para: *{clave.upper()}*")
