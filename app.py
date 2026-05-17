@@ -2,6 +2,8 @@ import streamlit as st
 # Importamos la lógica externa de nuestra carpeta de módulos
 from modulos.evaluacion_esg import calcular_nivel_esg
 from modulos.ciclo_vida import calcular_ley_corte, calcular_balance_masa, calcular_fondo_cierre
+from modulos.mercado_recursos import obtener_datos_minerales, calcular_ingresos_mercado
+
 
 st.set_page_config(page_title="Simulador Industrial MENFA", page_icon="🌍", layout="wide")
 
@@ -18,6 +20,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "🔍 Geología y Factibilidad", 
     "⛏️ Planta y Operación", 
     "🍃 Cierre de Mina"
+    "📈 Mercados y Commodities"
 ])
 
 # ---- PESTAÑA 1: EVALUACIÓN ESG ----
@@ -75,3 +78,59 @@ with tab4:
     
     reserva_anual = calcular_fondo_cierre(remediacion, vida_util)
     st.warning(f"⚖️ Fondo de Garantía Obligatorio: Se deben provisionar **USD {reserva_anual:,.2f} anuales**.")
+# ==========================================
+# ---- PESTAÑA 5: MERCADOS Y COMMODITIES ----
+# ==========================================
+with tab5:
+    st.header("Análisis de Mercados Mundiales y Comercialización")
+    st.write("El precio de los recursos mineros está atado a dinámicas geopolíticas y macroeconómicas externas. Simule su impacto:")
+
+    # Traemos las clasificaciones del módulo backend
+    lista_minerales = obtener_datos_minerales()
+    
+    col_ui1, col_ui2 = st.columns(2)
+    with col_ui1:
+        mineral_sel = st.selectbox("Seleccione el Grupo Estratégico de Recurso:", list(lista_minerales.keys()))
+        volumen = st.number_input("Volumen de producción anual estimado (en unidades comerciales):", value=12000, step=500)
+    
+    with col_ui2:
+        st.markdown("**Simulación de Eventos Macroeconómicos (Gobernanza de Mercado):**")
+        evento = st.radio("Seleccione un escenario geopolítico global:", [
+            "Estabilidad de Mercado (Sin cambios)",
+            "Aceleración Industrial de China (+15% en demanda)",
+            "Tensión Geopolítica / Conflictos Internacionales (-10% en logística)",
+            "Disrupción por Recesión Global o Cambio Tecnológico (-25% en commodities)"
+        ])
+        
+        # Mapeo del evento macro a porcentaje de fluctuación real de precios
+        dict_eventos = {
+            "Estabilidad de Mercado (Sin cambios)": 0.0,
+            "Aceleración Industrial de China (+15% en demanda)": 15.0,
+            "Tensión Geopolítica / Conflictos Internacionales (-10% en logística)": -10.0,
+            "Disrupción por Recesión Global o Cambio Tecnológico (-25% en commodities)": -25.0
+        }
+        fluctuacion = dict_eventos[evento]
+
+    # Invocamos la lógica matemática del backend
+    pr_ajustado, ingreso_total, tipo_mercado, mecanismo_venta = calcular_ingresos_mercado(mineral_sel, volumen, fluctuacion)
+    
+    # Despliegue de Resultados e Inteligencia de Negocio
+    st.markdown("---")
+    st.markdown(f"### 📊 Informe Ejecutivo de Comercialización: {mineral_sel}")
+    st.caption(f"**Clasificación del Activo:** {tipo_mercado} | **Modelo de Contrato:** {mecanismo_venta}")
+    
+    col_m1, col_m2 = st.columns(2)
+    with col_m1:
+        st.metric(
+            label="Precio de Venta Ajustado", 
+            value=f"USD {pr_ajustado:,.2f}", 
+            delta=f"{fluctuacion}% por condiciones externas" if fluctuacion != 0 else "Estable"
+        )
+    with col_m2:
+        st.metric(label="Facturación Bruta Proyectada Anual", value=f"USD {ingreso_total:,.2f}")
+        
+    # Mensaje educativo contextual para el alumno
+    if fluctuacion < 0:
+        st.error("🚨 **Riesgo de Viabilidad:** Las caídas en el mercado internacional impactan directo en el VAN/TIR local. Las operaciones deben optimizar su OPEX para resistir el ciclo bajo.")
+    elif fluctuacion > 0:
+        st.success("🚀 **Ciclo de Alta (Boom):** Ventana de oportunidad para acelerar inversiones, optimizar exploración y consolidar contratos de provisión de largo plazo.")
